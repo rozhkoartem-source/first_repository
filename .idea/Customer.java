@@ -1,4 +1,3 @@
-void main (String[] args) {}
 public class Customer {
 
     private String orderName;
@@ -8,16 +7,18 @@ public class Customer {
     private double orderCost;
     private boolean orderRecieved;
     private boolean orderSended;
+    private boolean orderInTransit;
     private boolean orderCanceled;
     private String orderCanceledReason;
     private String orderCategory;
 
     public Customer(String orderName, String orderLocation, int orderDateSend,
                     int orderId, boolean orderRecieved, boolean orderSended,
-                    boolean orderCanceled,
+                    boolean orderCanceled, boolean orderInTransit,
                     double orderCost, String orderCanceledReason, String orderCategory)
                     throws Exception {
     }
+    public Customer() {} //конструктор без параметрів
 
     public int getOrderId() {
         return orderId;
@@ -34,19 +35,26 @@ public class Customer {
         //возвращаем "имя" заказа
     }
 
-    public void setOrderStatus() {
-        if (orderCanceled) {
-            //определаяемое статус заказа
-            orderSended = true;
+    public void setOrderStatus(boolean canceled) {
+        //визначаємо статус замовлення
+        this.orderCanceled = canceled;
+        if (!orderCanceled) {
+            this.orderInTransit = true;
+            System.out.println("Статус: ОК");
+            //Якщо замовлення не скасовано (false), то статус "в дорозі" буде true
+        } else {
+            this.orderInTransit = false;
+            System.out.println("Статус: Отменено");
+            //Якщо замовлення скасовано (true), то статус "в дорозі" буде false, незалежно від статусу orderSended.
         }
     }
 
     private void setOrderCategory(String orderCategory) {
         this.orderCategory = orderCategory;
-    } // задаємо захищене значення категорії товару
-    //також схожа ситуація і з айди товару, воно може бути
-    //Визначальним значенням у пошуку товару на маркетплейсі у зв'язку з пошуком по айді товару
-
+        // задаємо захищене значення категорії товару
+        //також схожа ситуація і з айди товару, воно може бути
+        //Визначальним значенням у пошуку товару на маркетплейсі у зв'язку з пошуком по айді товару
+    }
 
     protected void setOrderId(int orderId) {
         this.orderId = orderId;
@@ -55,28 +63,12 @@ public class Customer {
         //ім'я не відповідає дійсності (якщо посередник змінив його)
         // Його можна використовувати для подання скарги або на повернення конкретного товару використовуючи
     }
-
-//    public void OrderCommisison() {} //метод OrderCommisison позволяет заказать сам заказ
-//
-//    public void wthOrderStatus() {
-//        if (orderRecieved) { //проверка на доставку заказа к покупателю
-//            //хз что ставить
-//        } else {
-//            orderCanceled = true;
-//            //если нет, то ставится галочка в буле orderCanceled
-//        }
-//
-//        if (orderCanceled) { //проверка на отмену (от покупателя, тех. причины или типо того
-//            orderCanceledReason = "причина";
-//            // будет указана причина отмены в orderCanceledReason
-//        } else {
-//            //ничего не трогаем
-//        }
-//
-//    }
 }
 
-
+void main (String[] args) {
+    Customer methodCallCustomer = new Customer();
+    methodCallCustomer.setOrderStatus(false); //Перевірка статусу замовлення
+}
 
 
 
