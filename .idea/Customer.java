@@ -41,10 +41,14 @@ public class Customer {
         if (!orderCanceled) {
             this.orderInTransit = true;
             System.out.println("Статус: ОК");
+            return orderDateSend;
             //Якщо замовлення не скасовано (false), то статус "в дорозі" буде true
         } else {
             this.orderInTransit = false;
-            System.out.println("Статус: Отменено");
+            System.out.println("Статус: Скасовано");
+            return orderId;
+            return orderCategory;
+            return orderName;
             //Якщо замовлення скасовано (true), то статус "в дорозі" буде false, незалежно від статусу orderSended.
         }
     }
@@ -65,10 +69,12 @@ public class Customer {
     }
 }
 
-void main (String[] args) {
-    Customer methodCallCustomer = new Customer();
-    methodCallCustomer.setOrderStatus(false); //Перевірка статусу замовлення
-}
+//void main (String[] args) {
+//    Customer methodCallCustomer = new Customer();
+//    Customer methodCallsetOrderStatus = new Customer();
+//    Customer methodCallsetOrderId = new Customer();
+//    methodCallCustomer.setOrderStatus(false); //Перевірка статусу замовлення
+//}
 
 
 
